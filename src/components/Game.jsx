@@ -23,12 +23,9 @@ class Game extends React.Component {
       });
       this.props.currentScore(this.state.currentScore + a + b);
     } else {
-      this.setState({
-        currentScore: 0,
-      });
       this.switchPlayer();
     }
-    this.props.currentPlayer(this.state.currentPlayer);
+    this.props.resetHold();
   };
 
   switchPlayer = () => {
@@ -38,18 +35,26 @@ class Game extends React.Component {
     if (this.state.currentPlayer === 2) {
       this.setState({ currentPlayer: 1 });
     }
-    this.props.currentScore(this.state.currentScore);
+    this.props.currentScore(0);
+    this.setState({
+      currentScore: 0,
+    });
     this.props.currentPlayer(this.state.currentPlayer);
+  };
+
+  Player = () => {
+    if (this.props.hold === 1) {
+      this.switchPlayer();
+      this.props.resetHold();
+    }
+    return this.state.currentPlayer;
   };
 
   render() {
     return (
       <div className="game">
         <div className="currently-playing">Currently playing:</div>
-
-        <div className="current-player">
-          {`Player ${this.state.currentPlayer}`}
-        </div>
+        <div className="current-player">{`Player ${this.Player()}`}</div>
         <div className="dice-pad">
           <div className="dice-left">
             <Dice value={this.state.dice1} />

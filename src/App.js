@@ -11,24 +11,11 @@ class App extends React.Component {
     currentScore: 0,
     player1Score: 0,
     player2Score: 0,
+    isHeld: 0,
+    winner: "",
     playersNum: 0, //not if for current or future use
     roundNum: 0, //future options
   };
-
-  handleClick = () => {
-    //(1)read curentPlayer from Game
-    //(2)read currentScore from Game
-    //(3)Update Player score
-    let s = this.state.currentScore;
-    if (this.state.currentPlayer === 1) {
-      this.setState({ player1Score: this.state.player1Score + s });
-    } else if (this.state.currentPlayer === 2) {
-      this.setState({ player2Score: this.state.player2Score + s });
-    }
-    //(4)switch Player
-    this.switchPplayer();
-  };
-
   updatePlayer = (id) => {
     this.setState({ currentPlayer: id });
   };
@@ -36,16 +23,49 @@ class App extends React.Component {
     this.setState({ currentScore: score });
   };
 
-  switchPplayer() {}
+  resetHold = () => {
+    this.setState({ isHeld: 0 });
+  };
+  handleClick = () => {
+    let s = this.state.currentScore;
+    if (this.state.currentPlayer === 1) {
+      this.setState({ player1Score: this.state.player1Score + s });
+    } else if (this.state.currentPlayer === 2) {
+      this.setState({ player2Score: this.state.player2Score + s });
+    }
+    this.winCheck();
+    this.setState({ isHeld: 1 });
+    this.switchPlayer();
+  };
+
+  winCheck = () => {
+    if (this.state.player1Score > 100 || this.state.player2Score > 100) {
+      this.setState({ winner: "YOU WON!" });
+    }
+    console.log(this.state.player1Score);
+    console.log(this.state.player2Score);
+    console.log(this.state.winner);
+  };
+  switchPlayer = () => {
+    if (this.state.currentPlayer === 1) {
+      this.setState({ currentPlayer: 2 });
+    }
+    if (this.state.currentPlayer === 2) {
+      this.setState({ currentPlayer: 1 });
+    }
+  };
   render() {
     return (
       <div className="game-container">
-        player:{this.state.currentPlayer} score: {this.state.currentScore}
+        {this.state.currentPlayer} {this.state.winner}
         <div className="game-area">
           <div>
             <Game
               currentPlayer={this.updatePlayer}
               currentScore={this.updateScore}
+              switchPlayer={this.switchPlayer}
+              resetHold={this.resetHold}
+              hold={this.state.isHeld}
             />
           </div>
           <div className="scores">
