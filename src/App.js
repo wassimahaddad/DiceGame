@@ -34,7 +34,6 @@ class App extends React.Component {
     } else if (this.state.currentPlayer === 2) {
       this.setState({ player2Score: this.state.player2Score + s });
     }
-
     this.winCheck();
     this.setState({ isHeld: 1 });
     this.switchPlayer();
@@ -65,6 +64,7 @@ class App extends React.Component {
     this.setState({ player1Score: 0 });
     this.setState({ player2Score: 0 });
     this.setState({ limit: 100 });
+    this.setState({ isHeld: 1 });
   };
 
   handleLimit = () => {};
@@ -79,6 +79,7 @@ class App extends React.Component {
               switchPlayer={this.switchPlayer}
               resetHold={this.resetHold}
               hold={this.state.isHeld}
+              over={this.state.isOver}
             />
           </div>
           <div className={this.state.winClass[0]}>

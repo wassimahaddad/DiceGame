@@ -21,6 +21,7 @@ class Game extends React.Component {
       this.setState({
         currentScore: this.state.currentScore + a + b,
       });
+
       this.props.currentScore(this.state.currentScore + a + b);
     } else {
       this.switchPlayer();
@@ -29,6 +30,7 @@ class Game extends React.Component {
   };
 
   switchPlayer = () => {
+    this.setState({ dice1: 0, dice2: 0 });
     if (this.state.currentPlayer === 1) {
       this.setState({ currentPlayer: 2 });
     }
