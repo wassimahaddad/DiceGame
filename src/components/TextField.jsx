@@ -9,6 +9,8 @@ class TextField extends React.Component {
           className={this.props.className}
           type="text"
           placeholder={this.props.placeholder}
+          onChange={this.props.onChange}
+          value={this.props.value}
         />
       </div>
     );

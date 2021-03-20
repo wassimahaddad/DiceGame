@@ -64,8 +64,10 @@ class App extends React.Component {
     this.setState({ gameClass: "" });
     this.setState({ player1Score: 0 });
     this.setState({ player2Score: 0 });
+    this.setState({ limit: 100 });
   };
 
+  handleLimit = () => {};
   render() {
     return (
       <div className="game-container">
@@ -108,11 +110,15 @@ class App extends React.Component {
           </div>
           <div className="action-wrapper">
             <div className="action">
+              {/* ---------------------------- */}
               <TextField
                 className="limit-button"
                 name="Limit"
                 placeholder="default is 100"
+                value={this.state.limit}
+                onChange={(e) => this.setState({ limit: e.target.value })}
               />
+              {/* ---------------------------- */}
             </div>
           </div>
           <div className="action-wrapper">
