@@ -7,7 +7,7 @@ class Game extends React.Component {
     dice1: 0,
     dice2: 0,
     currentScore: 0,
-    currentPlayer: 1,
+    currentPlayer: Math.floor(Math.random() * 2) + 1,
   };
 
   handleClick = () => {

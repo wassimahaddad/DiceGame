@@ -15,7 +15,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10vh;
-  background: #999;
+  background: #ccc;
   border-radius: 20px;
   opacity: 95%;
 }
@@ -137,7 +137,7 @@ body {
   width: 16vw;
   height: 40vh;
   margin-left: 4vw;
-  background: grey;
+  background: #222;
   border-radius: 20px;
 }
 
@@ -201,11 +201,18 @@ body {
   border-radius: 20px;
   width: 8vw;
   text-align: center;
+  font-weight: bold;
 }
 .limit-button {
   width: 4vw;
 }
 
+.hold-button {
+  color: green;
+}
+.newgame-button {
+  color: red;
+}
 .hide {
   display: none;
 }
