@@ -5,9 +5,9 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
+/* body {
   background: url("./img/bg.jpeg") center center/cover;
-}
+} */
 .game-container {
   width: 70vw;
   height: 70vh;
