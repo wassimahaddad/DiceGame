@@ -7,15 +7,15 @@ import TextField from "./components/TextField";
 class App extends React.Component {
   state = {
     limit: 100,
-    currentPlayer: "",
+    currentPlayer: 1,
     currentScore: 0,
     player1Score: 0,
     player2Score: 0,
     isHeld: 0,
-    winner: "",
-    playersNum: 0, //not if for current or future use
-    roundNum: 0, //future options
+    gameClass: "",
+    winClass: ["hide", "hide", "hide"],
   };
+
   updatePlayer = (id) => {
     this.setState({ currentPlayer: id });
   };
@@ -25,6 +25,7 @@ class App extends React.Component {
 
   resetHold = () => {
     this.setState({ isHeld: 0 });
+    this.winCheck();
   };
   handleClick = () => {
     let s = this.state.currentScore;
@@ -33,19 +34,22 @@ class App extends React.Component {
     } else if (this.state.currentPlayer === 2) {
       this.setState({ player2Score: this.state.player2Score + s });
     }
+
     this.winCheck();
     this.setState({ isHeld: 1 });
     this.switchPlayer();
   };
 
   winCheck = () => {
-    if (this.state.player1Score > 100 || this.state.player2Score > 100) {
-      this.setState({ winner: "YOU WON!" });
+    if (
+      this.state.player1Score >= this.state.limit ||
+      this.state.player2Score >= this.state.limit
+    ) {
+      this.setState({ winClass: ["show", "winner", "you-win"] });
+      this.setState({ gameClass: "hide" });
     }
-    console.log(this.state.player1Score);
-    console.log(this.state.player2Score);
-    console.log(this.state.winner);
   };
+
   switchPlayer = () => {
     if (this.state.currentPlayer === 1) {
       this.setState({ currentPlayer: 2 });
@@ -54,12 +58,19 @@ class App extends React.Component {
       this.setState({ currentPlayer: 1 });
     }
   };
+
+  newGame = () => {
+    this.setState({ winClass: ["hide", "hide", "hide"] });
+    this.setState({ gameClass: "" });
+    this.setState({ player1Score: 0 });
+    this.setState({ player2Score: 0 });
+  };
+
   render() {
     return (
       <div className="game-container">
-        {this.state.currentPlayer} {this.state.winner}
         <div className="game-area">
-          <div>
+          <div className={this.state.gameClass}>
             <Game
               currentPlayer={this.updatePlayer}
               currentScore={this.updateScore}
@@ -67,6 +78,12 @@ class App extends React.Component {
               resetHold={this.resetHold}
               hold={this.state.isHeld}
             />
+          </div>
+          <div className={this.state.winClass[0]}>
+            <div className={this.state.winClass[1]}>
+              Player {this.state.currentPlayer}
+            </div>
+            <div className={this.state.winClass[2]}></div>
           </div>
           <div className="scores">
             <div id="player1-score" className="player-score">
@@ -100,7 +117,11 @@ class App extends React.Component {
           </div>
           <div className="action-wrapper">
             <div className="action">
-              <Button className="newgame-button" name="New Game" />
+              <Button
+                onClick={this.newGame}
+                className="newgame-button"
+                name="New Game"
+              />
             </div>
           </div>
         </div>

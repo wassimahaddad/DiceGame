@@ -67,11 +67,11 @@ class Game extends React.Component {
           <div>
             <Button
               onClick={this.handleClick}
-              name="Roll"
+              name="Roll Dice"
               className="roll-button"
             />
           </div>
-          <div> current score: {this.state.currentScore}</div>
+          <div>Current score: {this.state.currentScore}</div>
         </div>
       </div>
     );
