@@ -3,6 +3,9 @@ import Dice from "./Dice";
 import Button from "./Button";
 
 class Game extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     dice1: 0,
     dice2: 0,
