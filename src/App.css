@@ -6,8 +6,7 @@
 }
 
 body {
-  background: url("./img/bg.jpeg") no-repeat center center / cover;
-  height: 100vh;
+  background: url("./img/bg.jpeg") no-repeat center center/cover;
 }
 .game-container {
   width: 70vw;
