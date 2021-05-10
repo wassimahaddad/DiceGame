@@ -17,7 +17,7 @@ body {
   margin-top: 10vh;
   background: #ccc;
   border-radius: 20px;
-  opacity: 95%;
+  opacity: 0.95;
 }
 
 .game-area {
